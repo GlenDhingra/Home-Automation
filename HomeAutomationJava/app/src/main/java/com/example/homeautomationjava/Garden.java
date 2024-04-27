@@ -20,13 +20,13 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Kitchen extends AppCompatActivity {
+public class Garden extends AppCompatActivity {
 
 
-    LinearLayout whiteComponent;
-    Switch  whiteSwitch;
-    TextView whiteTextView;
-    ImageView whiteImageView;
+    LinearLayout whiteComponent, doorComponent;
+    Switch  whiteSwitch, doorSwitch;
+    TextView whiteTextView, doorTextView;
+    ImageView whiteImageView, doorImageView;
 
     String activity="";
     String serverComponent="";
@@ -35,7 +35,7 @@ public class Kitchen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_kitchen);
+        setContentView(R.layout.activity_garden);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -51,17 +51,40 @@ public class Kitchen extends AppCompatActivity {
 
         whiteSwitch = (Switch) whiteComponent.findViewById(R.id.deviceSwitch);
 
+        doorComponent = (LinearLayout) findViewById(R.id.doorControl);
+
+        doorTextView = (TextView) doorComponent.findViewById(R.id.deviceName);
+        doorTextView.setText("Door");
+
+        doorImageView = (ImageView) doorComponent.findViewById(R.id.deviceIcon);
+        doorImageView.setImageResource(R.drawable.garagedoor);
+
+        doorSwitch = (Switch) doorComponent.findViewById(R.id.deviceSwitch);
+
         whiteSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Toast.makeText(getApplicationContext(),"White Checked!!!",Toast.LENGTH_SHORT).show();
-                    serverComponent = "whiteLightOn";
-                    new Kitchen.SendHttpRequestTask().execute();
+                    serverComponent = "lightOn";
                 }else{
                     Toast.makeText(getApplicationContext(),"White Unchecked!!!",Toast.LENGTH_SHORT).show();
-                    serverComponent = "whiteLightOff";
-                    new Kitchen.SendHttpRequestTask().execute();
+                    serverComponent = "lightOff";
+                }
+            }
+        });
+
+        doorSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(getApplicationContext(),"Door Checked!!!",Toast.LENGTH_SHORT).show();
+                    serverComponent = "gateOpen";
+                    new Garden.SendHttpRequestTask().execute();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Door Unchecked!!!",Toast.LENGTH_SHORT).show();
+                    serverComponent = "gateClose";
+                    new Garden.SendHttpRequestTask().execute();
                 }
             }
         });
@@ -93,10 +116,10 @@ public class Kitchen extends AppCompatActivity {
             super.onPostExecute(success);
             if (success) {
                 // Request succeeded
-                Toast.makeText(Kitchen.this, "LED Turned On", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Garden.this, "LED Turned On", Toast.LENGTH_SHORT).show();
             } else {
                 // Request failed
-                Toast.makeText(Kitchen.this, "Failed to Turn On LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Garden.this, "Failed to Turn On LED", Toast.LENGTH_SHORT).show();
             }
         }
     }

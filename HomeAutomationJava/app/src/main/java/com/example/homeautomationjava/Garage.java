@@ -44,7 +44,7 @@ public class Garage extends AppCompatActivity {
         doorTextView.setText("Door");
 
         doorImageView = (ImageView) doorComponent.findViewById(R.id.deviceIcon);
-        doorImageView.setImageResource(R.drawable.garage);
+        doorImageView.setImageResource(R.drawable.garagedoor);
 
         doorSwitch = (Switch) doorComponent.findViewById(R.id.deviceSwitch);
 
@@ -53,11 +53,11 @@ public class Garage extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     Toast.makeText(getApplicationContext(),"Door Checked!!!",Toast.LENGTH_SHORT).show();
-                    serverComponent = "DoorOpen";
+                    serverComponent = "doorOpen";
                     new Garage.SendHttpRequestTask().execute();
                 }else{
                     Toast.makeText(getApplicationContext(),"Door Unchecked!!!",Toast.LENGTH_SHORT).show();
-                    serverComponent = "DoorDoor";
+                    serverComponent = "doorClose";
                     new Garage.SendHttpRequestTask().execute();
                 }
             }
@@ -73,7 +73,7 @@ public class Garage extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.240.5/"+ activity + "/" +serverComponent);
+                URL url = new URL("http://192.168.76.5/"+ activity + "/" +serverComponent);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 // Optionally, you can set request properties or handle the response here
                 int responseCode = connection.getResponseCode();

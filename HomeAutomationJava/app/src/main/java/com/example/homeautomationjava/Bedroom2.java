@@ -23,10 +23,10 @@ import java.net.URL;
 
 public class Bedroom2 extends AppCompatActivity {
 
-    LinearLayout fanComponent, windowComponent, redComponent,greenComponent, blueComponent,  whiteComponent;
-    Switch fanSwitch, windowSwitch, redSwitch, greenSwitch, blueSwitch, whiteSwitch;
-    TextView fanTextView, windowTextView, redTextView, greenTextView, blueTextView,  whiteTextView;
-    ImageView fanImageView, windowImageView, redImageView, blueImageView, greenImageView, whiteImageView;
+    LinearLayout fanComponent, windowComponent, whiteComponent;
+    Switch fanSwitch, windowSwitch, whiteSwitch;
+    TextView fanTextView, windowTextView,  whiteTextView;
+    ImageView fanImageView, windowImageView, whiteImageView;
 
     String serverComponent;
     Toast fanToast;
@@ -47,9 +47,6 @@ public class Bedroom2 extends AppCompatActivity {
 
         fanComponent = (LinearLayout) findViewById(R.id.fanControl);
         windowComponent = (LinearLayout) findViewById(R.id.windowControl);
-        redComponent = (LinearLayout) findViewById(R.id.redControl);
-        greenComponent = ( LinearLayout ) findViewById(R.id.greenControl);
-        blueComponent = ( LinearLayout ) findViewById(R.id.blueControl);
         whiteComponent = (LinearLayout) findViewById(R.id.whiteControl);
 
         fanTextView = (TextView) fanComponent.findViewById(R.id.deviceName);
@@ -58,35 +55,17 @@ public class Bedroom2 extends AppCompatActivity {
         windowTextView = (TextView) windowComponent.findViewById(R.id.deviceName);
         windowTextView.setText("Window");
 
-        redTextView = (TextView) redComponent.findViewById(R.id.deviceName);
-        redTextView.setText("Red Light");
-
-        greenTextView = (TextView) greenComponent.findViewById(R.id.deviceName);
-        greenTextView.setText("Green Light");
-
-        blueTextView = (TextView) blueComponent.findViewById(R.id.deviceName);
-        blueTextView.setText("Blue Light");
-
         whiteTextView = (TextView) whiteComponent.findViewById(R.id.deviceName);
-        whiteTextView.setText("White Text");
+        whiteTextView.setText("White Light");
 
         fanImageView = (ImageView) fanComponent.findViewById(R.id.deviceIcon);
         fanImageView.setImageResource(R.drawable.fanicon);
 
         windowImageView = (ImageView) windowComponent.findViewById(R.id.deviceIcon);
-        windowImageView.setImageResource(R.drawable.fanicon);
-
-        redImageView = (ImageView) redComponent.findViewById(R.id.deviceIcon);
-        redImageView.setImageResource(R.drawable.fanicon);
-
-        greenImageView = (ImageView) greenComponent.findViewById(R.id.deviceIcon);
-        greenImageView.setImageResource(R.drawable.fanicon);
-
-        blueImageView = (ImageView) blueComponent.findViewById(R.id.deviceIcon);
-        blueImageView.setImageResource(R.drawable.fanicon);
+        windowImageView.setImageResource(R.drawable.window);
 
         whiteImageView = (ImageView) whiteComponent.findViewById(R.id.deviceIcon);
-        whiteImageView.setImageResource(R.drawable.fanicon);
+        whiteImageView.setImageResource(R.drawable.light);
 
 
         fanSwitch = (Switch) fanComponent.findViewById(R.id.deviceSwitch);
@@ -95,8 +74,12 @@ public class Bedroom2 extends AppCompatActivity {
             public void onClick(View v) {
                 if(fanSwitch.isChecked()){
                     fanToast=Toast.makeText(getApplicationContext(),"Fan Checked!!!",Toast.LENGTH_SHORT);
+                    serverComponent = "fanOn";
+                    new SendHttpRequestTask().execute();
                 } else{
                     fanToast=Toast.makeText(getApplicationContext(),"Fan Unchecked!!!",Toast.LENGTH_SHORT);
+                    serverComponent = "fanOff";
+                    new SendHttpRequestTask().execute();
                 }
                 fanToast.show();
             }
@@ -108,44 +91,12 @@ public class Bedroom2 extends AppCompatActivity {
             public void onClick(View v) {
                 if( windowSwitch.isChecked() ){
                     Toast.makeText(getApplicationContext(),"Window Checked!!!",Toast.LENGTH_SHORT).show();
+                    serverComponent = "windowOpen";
+                    new SendHttpRequestTask().execute();
                 }else{
                     Toast.makeText(getApplicationContext(),"Window Unchecked!!!",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        redSwitch = (Switch) redComponent.findViewById(R.id.deviceSwitch);
-        redSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( redSwitch.isChecked() ) {
-                    Toast.makeText(getApplicationContext(),"Red Checked!!!",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Red Unchecked!!!",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        greenSwitch = (Switch) greenComponent.findViewById(R.id.deviceSwitch);
-        greenSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( greenSwitch.isChecked() ) {
-                    Toast.makeText(getApplicationContext(),"Green Checked!!!",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Green Unchecked!!!",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        blueSwitch = (Switch) blueComponent.findViewById(R.id.deviceSwitch);
-        blueSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( greenSwitch.isChecked() ) {
-                    Toast.makeText(getApplicationContext(),"Blue Checked!!!",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Blue Unchecked!!!",Toast.LENGTH_SHORT).show();
+                    serverComponent = "windowClose";
+                    new SendHttpRequestTask().execute();
                 }
             }
         });
@@ -156,10 +107,10 @@ public class Bedroom2 extends AppCompatActivity {
             public void onClick(View v) {
                 if( whiteSwitch.isChecked() ){
                     Toast.makeText(getApplicationContext(),"White Checked!!!",Toast.LENGTH_SHORT).show();
-                    serverComponent = "GledOn";
+                    serverComponent = "whiteLightOn";
                     new SendHttpRequestTask().execute();
                 }else{
-                    serverComponent = "GledOff";
+                    serverComponent = "whiteLightOff";
                     new SendHttpRequestTask().execute();
                 }
             }
@@ -177,7 +128,7 @@ public class Bedroom2 extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.240.5/" +serverComponent);
+                URL url = new URL("http://192.168.76.5/" +serverComponent);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 // Optionally, you can set request properties or handle the response here
                 int responseCode = connection.getResponseCode();

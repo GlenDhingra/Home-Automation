@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#20243b"
+    android:fillViewport="false">
+
+
+
+<LinearLayout
     android:id="@+id/main"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#20243b"
     tools:context=".MainActivity">
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,13 +33,15 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             />
+
         <include
-            android:id="@+id/bedRoom1"
+            android:id="@+id/garage"
             layout="@layout/cardcomponenthome"
             android:layout_width="500px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-             />
+            />
+
 
     </LinearLayout>
 
@@ -74,22 +87,32 @@
             android:layout_marginLeft="20dp"
              />
 
+
         <include
-            android:id="@+id/garage"
+            android:id="@+id/garden"
             layout="@layout/cardcomponenthome"
             android:layout_width="500px"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-             />
-
+            />
 
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        >
+
+
 
     <TextView
         android:id="@+id/textViewRaindrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
+    </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

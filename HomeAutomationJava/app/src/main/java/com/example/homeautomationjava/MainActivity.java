@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    LinearLayout climateComponent, bedRoom1Component, bedRoom2Component, kitchenComponent, livingRoomComponent, garageComponent;
-    ImageView climateImageView, bedRoom1ImageView, bedRoom2ImageView, kitchenImageView, livingRoomImageView, garageImageView;
-    TextView climateTextView, bedRoom1TextView, bedRoom2TextView, kitchenTextView, livingRoomTextView, garageTextView, textViewRaindrop;
+    LinearLayout climateComponent, bedRoom2Component, kitchenComponent, livingRoomComponent, garageComponent, gardenComponent;
+    ImageView climateImageView, bedRoom2ImageView, kitchenImageView, livingRoomImageView, garageImageView, gardenImageView;
+    TextView climateTextView, bedRoom2TextView, kitchenTextView, livingRoomTextView, garageTextView, textViewRaindrop, gardenTextView;
 
     String rainDropString = "No Data yet!";
 
@@ -48,22 +48,11 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        climateComponent = (LinearLayout) findViewById(R.id.climate);
-        climateTextView = (TextView) climateComponent.findViewById(R.id.deviceName);
-        climateTextView.setText("23 C");
-        climateImageView = (ImageView) climateComponent.findViewById(R.id.deviceIcon);
-        climateImageView.setImageResource(R.drawable.rain);
-
-        bedRoom1Component = (LinearLayout) findViewById(R.id.bedRoom1);
-        bedRoom1TextView = (TextView) bedRoom1Component.findViewById(R.id.deviceName);
-        bedRoom1TextView.setText("BedRoom 1");
-        bedRoom1ImageView = (ImageView) bedRoom1Component.findViewById(R.id.deviceIcon);
-        bedRoom1ImageView.setImageResource(R.drawable.hotel);
 
 
         bedRoom2Component = (LinearLayout) findViewById(R.id.bedRoom2);
         bedRoom2TextView = (TextView) bedRoom2Component.findViewById(R.id.deviceName);
-        bedRoom2TextView.setText("BedRoom 2");
+        bedRoom2TextView.setText("BedRoom");
         bedRoom2ImageView = (ImageView) bedRoom2Component.findViewById(R.id.deviceIcon);
         bedRoom2ImageView.setImageResource(R.drawable.hotel);
 
@@ -88,28 +77,29 @@ public class MainActivity extends AppCompatActivity {
         garageImageView = (ImageView) garageComponent.findViewById(R.id.deviceIcon);
         garageImageView.setImageResource(R.drawable.garage);
 
+        gardenComponent = (LinearLayout) findViewById(R.id.garden);
+        gardenTextView = (TextView) gardenComponent.findViewById(R.id.deviceName);
+        gardenTextView.setText("Garden");
+        gardenImageView = (ImageView) gardenComponent.findViewById(R.id.deviceIcon);
+        gardenImageView.setImageResource(R.drawable.garden);
+
         textViewRaindrop = (TextView) findViewById(R.id.textViewRaindrop);
+        textViewRaindrop.setText("");
+
+        climateComponent = (LinearLayout) findViewById(R.id.climate);
+        climateTextView = (TextView) climateComponent.findViewById(R.id.deviceName);
+        climateImageView = (ImageView) climateComponent.findViewById(R.id.deviceIcon);
+        climateImageView.setImageResource(R.drawable.sun);
 
         fetchTestData();
 
 
-        bedRoom1Component.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(MainActivity.this, Bedroom2.class);
-                activityChosen = "bedroom1";
-                bundle.putString("activity", activityChosen);
-                i.putExtras(bundle);
-                startActivity(i);
-            }
-        });
         bedRoom2Component.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent i = new Intent(MainActivity.this, Bedroom2.class);
-                activityChosen = "bedroom2";
+                activityChosen = "bedroom";
                 bundle.putString("activity", activityChosen);
                 i.putExtras(bundle);
                 startActivity(i);
@@ -120,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(MainActivity.this, Bedroom2.class);
+                Intent i = new Intent(MainActivity.this, LivingRoom.class);
                 activityChosen = "livingRoom";
                 bundle.putString("activity", activityChosen);
                 i.putExtras(bundle);
@@ -145,7 +135,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i = new Intent(MainActivity.this, Garage.class);
-                activityChosen = "gatage";
+                activityChosen = "garage";
+                bundle.putString("activity", activityChosen);
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
+
+
+        gardenComponent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MainActivity.this, Garden.class);
+                activityChosen = "garden";
                 bundle.putString("activity", activityChosen);
                 i.putExtras(bundle);
                 startActivity(i);
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.240.5/raindrop");
+                    URL url = new URL("http://192.168.240.5/DHTValues");
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
@@ -177,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
                             result.append(line);
                         }
                         rainDropString = result.toString();
-                        textViewRaindrop.setText(rainDropString);
-                        System.out.println("Response: " + result.toString()); // Output the response in the console
+                        climateTextView.setText(rainDropString);
                     } finally {
                         urlConnection.disconnect();
                     }
