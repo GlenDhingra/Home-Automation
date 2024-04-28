@@ -11,7 +11,7 @@
     <include
         android:id="@+id/redControl"
         layout="@layout/cardcomponent"
-        android:layout_width="156dp"
+        android:layout_width="128dp"
         android:layout_height="167dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
     <include
         android:id="@+id/whiteControl"
         layout="@layout/cardcomponent"
-        android:layout_width="156dp"
+        android:layout_width="128dp"
         android:layout_height="167dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
     <include
         android:id="@+id/greenControl"
         layout="@layout/cardcomponent"
-        android:layout_width="156dp"
+        android:layout_width="128dp"
         android:layout_height="167dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
     <include
         android:id="@+id/blueControl"
         layout="@layout/cardcomponent"
-        android:layout_width="156dp"
+        android:layout_width="128dp"
         android:layout_height="167dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,20 +59,20 @@
     <include
         android:id="@+id/fanControl"
         layout="@layout/cardcomponent"
-        android:layout_width="156dp"
+        android:layout_width="128dp"
         android:layout_height="167dp"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.109"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/white"
         app:layout_constraintVertical_bias="0.129" />
 
     <include
         android:id="@+id/windowControl"
         layout="@layout/cardcomponent"
-        android:layout_width="156dp"
+        android:layout_width="128dp"
         android:layout_height="167dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
