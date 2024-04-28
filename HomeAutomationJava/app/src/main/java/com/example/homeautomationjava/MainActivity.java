@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.240.5/DHTValues");
+                    URL url = new URL("http://192.168.76.5/DHTValues");
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());

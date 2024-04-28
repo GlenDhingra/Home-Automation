@@ -29,17 +29,17 @@
         <include
             android:id="@+id/climate"
             layout="@layout/cardcomponenthome"
-            android:layout_width="500px"
-            android:layout_height="wrap_content"
+            android:layout_width="400px"
+            android:layout_height="200dp"
             android:layout_marginLeft="20dp"
             />
 
         <include
             android:id="@+id/garage"
             layout="@layout/cardcomponenthome"
-            android:layout_width="500px"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_width="400px"
+            android:layout_height="200dp"
+            android:layout_marginLeft="40dp"
             />
 
 
@@ -56,17 +56,17 @@
         <include
             android:id="@+id/bedRoom2"
             layout="@layout/cardcomponenthome"
-            android:layout_width="500px"
-            android:layout_height="wrap_content"
+            android:layout_width="400px"
+            android:layout_height="200dp"
             android:layout_marginLeft="20dp"
             />
 
         <include
             android:id="@+id/livingRoom"
             layout="@layout/cardcomponenthome"
-            android:layout_width="500px"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_width="400px"
+            android:layout_height="200dp"
+            android:layout_marginLeft="40dp"
              />
 
 
@@ -82,8 +82,8 @@
         <include
             android:id="@+id/kitchen"
             layout="@layout/cardcomponenthome"
-            android:layout_width="500px"
-            android:layout_height="wrap_content"
+            android:layout_width="400px"
+            android:layout_height="200dp"
             android:layout_marginLeft="20dp"
              />
 
@@ -91,9 +91,9 @@
         <include
             android:id="@+id/garden"
             layout="@layout/cardcomponenthome"
-            android:layout_width="500px"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_width="400px"
+            android:layout_height="200dp"
+            android:layout_marginLeft="40dp"
             />
 
 

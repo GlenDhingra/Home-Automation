@@ -129,7 +129,7 @@ public class LivingRoom extends AppCompatActivity {
                     new LivingRoom.SendHttpRequestTask().execute();
                 } else {
                     Toast.makeText(getApplicationContext(), "Red Unchecked!!!", Toast.LENGTH_SHORT).show();
-                    serverComponent = "redLightOff";
+                    serverComponent = "rgbOff";
                     new LivingRoom.SendHttpRequestTask().execute();
                 }
             }
@@ -145,7 +145,7 @@ public class LivingRoom extends AppCompatActivity {
                     new LivingRoom.SendHttpRequestTask().execute();
                 } else {
                     Toast.makeText(getApplicationContext(), "Green Unchecked!!!", Toast.LENGTH_SHORT).show();
-                    serverComponent = "greenLightOff";
+                    serverComponent = "rgbOff";
                     new LivingRoom.SendHttpRequestTask().execute();
                 }
             }
@@ -161,7 +161,7 @@ public class LivingRoom extends AppCompatActivity {
                     new LivingRoom.SendHttpRequestTask().execute();
                 } else {
                     Toast.makeText(getApplicationContext(), "Blue Unchecked!!!", Toast.LENGTH_SHORT).show();
-                    serverComponent = "blueLightOff";
+                    serverComponent = "rgbOff";
                     new LivingRoom.SendHttpRequestTask().execute();
                 }
             }

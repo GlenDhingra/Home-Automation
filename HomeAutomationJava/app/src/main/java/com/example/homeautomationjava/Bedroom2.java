@@ -128,7 +128,7 @@ public class Bedroom2 extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.76.5/" +serverComponent);
+                URL url = new URL("http://192.168.76.5/"+ activity + "/" +serverComponent);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 // Optionally, you can set request properties or handle the response here
                 int responseCode = connection.getResponseCode();

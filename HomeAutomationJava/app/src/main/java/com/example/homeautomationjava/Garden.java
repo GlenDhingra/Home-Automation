@@ -67,6 +67,7 @@ public class Garden extends AppCompatActivity {
                 if(isChecked){
                     Toast.makeText(getApplicationContext(),"White Checked!!!",Toast.LENGTH_SHORT).show();
                     serverComponent = "lightOn";
+                    new Garden.SendHttpRequestTask().execute();
                 }else{
                     Toast.makeText(getApplicationContext(),"White Unchecked!!!",Toast.LENGTH_SHORT).show();
                     serverComponent = "lightOff";
@@ -84,6 +85,7 @@ public class Garden extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(),"Door Unchecked!!!",Toast.LENGTH_SHORT).show();
                     serverComponent = "gateClose";
+                    new Garden.SendHttpRequestTask().execute();
                     new Garden.SendHttpRequestTask().execute();
                 }
             }
