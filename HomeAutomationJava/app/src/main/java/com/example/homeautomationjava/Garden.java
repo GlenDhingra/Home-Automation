@@ -71,6 +71,7 @@ public class Garden extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(),"White Unchecked!!!",Toast.LENGTH_SHORT).show();
                     serverComponent = "lightOff";
+                    new Garden.SendHttpRequestTask().execute();
                 }
             }
         });

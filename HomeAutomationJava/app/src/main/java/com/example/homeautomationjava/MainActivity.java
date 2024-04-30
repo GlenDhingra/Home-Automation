@@ -179,7 +179,11 @@ public class MainActivity extends AppCompatActivity {
                         while ((line = reader.readLine()) != null) {
                             result.append(line);
                         }
+
                         rainDropString = result.toString();
+                        String temp = rainDropString.substring(0,5);
+                        String hum = rainDropString.substring(5,rainDropString.length());
+                        rainDropString = temp +  " Degree C " +"\n"+hum + "%RH " ;
                         climateTextView.setText(rainDropString);
                     } finally {
                         urlConnection.disconnect();
